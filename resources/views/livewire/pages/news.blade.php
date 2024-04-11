@@ -14,7 +14,7 @@ new class extends Component
      */
      public function mount(): void
     {
-        $this->blogs = Blog::where('type', 0)->orderBy('id', 'desc')->get()->toArray();
+        $this->blogs = Blog::where('type', 0)->orderBy('id', 'desc')->get(['id','cover', 'title', 'type', 'updated_at'])->toArray();
     }
 }; ?>
 
@@ -39,7 +39,7 @@ new class extends Component
                             <a href="/blog/detail/{{ $blog['id'] }}" class="font-semibold text-gray-800 hover:underline dark:text-white md:text-xl">
                                 {{ $blog['title'] }}
                             </a>
-                            <p class="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
+                            {{-- <p class="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
                                 @php
                                     // Find the position of "<p>"
                                     $startPos = strpos($blog['desc'], "<p>");
@@ -54,7 +54,7 @@ new class extends Component
                                     }
                                 @endphp
                                 {!! Illuminate\Support\Str::limit($textBetweenTags, 130, '...') !!}
-                            </p>
+                            </p> --}}
 
                             <div class="flex mt-3 justify-between">
                                 <p class="text-blue-500 text-sm">{{ ($blog['type'] == 0) ? "News" : "Blog" }}</p>
