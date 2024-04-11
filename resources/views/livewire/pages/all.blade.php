@@ -14,7 +14,7 @@ new class extends Component
      */
      public function mount(): void
     {
-        $this->blogs = Blog::orderBy('id', 'desc')->get()->toArray();
+        $this->blogs = Blog::orderBy('id', 'desc')->take(4)->get()->toArray();
     }
 }; ?>
 
