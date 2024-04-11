@@ -4,9 +4,11 @@ use App\Livewire\Actions\Logout;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 use App\Models\Blog;
+use Livewire\WithPagination;
 
 new class extends Component
 {
+    use WithPagination;
     public array $blogs = [];
 
     /**
@@ -14,11 +16,14 @@ new class extends Component
      */
      public function mount(): void
     {
-        $this->blogs = Blog::where('type', 0)->orderBy('id', 'desc')->get(['id','cover', 'title', 'type', 'updated_at'])->toArray();
+        // $this->blogs = Blog::where('type', 0)->orderBy('id', 'desc')->get(['id','cover', 'title', 'type', 'updated_at'])->toArray();
     }
 }; ?>
 
 <section class="bg-white dark:bg-gray-900">
+    @php
+        $blogs_withpage = Blog::where('type', 0)->orderBy('id', 'desc')->paginate(6, ['id','cover', 'title', 'type', 'updated_at']);
+    @endphp
     <div class="container px-6 py-10 mx-auto">
         {{-- <div class="text-center">
             <h1 class="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">From the blog</h1>
@@ -29,9 +34,9 @@ new class extends Component
             </p>
         </div> --}}
 
-        @if ($blogs)
+        @if ($blogs_withpage)
             <div class="grid grid-cols-1 gap-8 mt-8 lg:grid-cols-2">
-                @foreach ($blogs as $blog)
+                @foreach ($blogs_withpage as $blog)
                     <div>
                         <img class="relative z-10 object-cover w-full rounded-md h-96" src="/uploads/news/{{ $blog['cover'] }}" alt="">
 
@@ -65,6 +70,9 @@ new class extends Component
                         </div>
                     </div>
                 @endforeach
+            </div>
+            <div class="mt-4">
+                {{ $blogs_withpage->links() }}
             </div>
         @else
             <div class="flex justify-center">
