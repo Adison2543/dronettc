@@ -37,13 +37,13 @@ new class extends Component
         @if ($blogs_withpage)
             <div class="grid grid-cols-1 gap-8 mt-8 lg:grid-cols-2">
                 @foreach ($blogs_withpage as $blog)
-                    <div>
+                <a href="/blog/detail/{{ $blog['id'] }}">
+                    <div class="group/card">
                         <img class="relative z-10 object-cover w-full rounded-md h-96" src="/uploads/news/{{ $blog['cover'] }}" alt="">
 
-                        <div class="relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md shadow dark:bg-gray-900">
-                            <a href="/blog/detail/{{ $blog['id'] }}" class="font-semibold text-gray-800 hover:underline dark:text-white md:text-xl">
-                                {{ $blog['title'] }}
-                            </a>
+                        <div class="transition group-hover/card:-translate-y-6 relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md shadow dark:bg-gray-900">
+
+                            <p class="font-semibold text-gray-800 group-hover/card:underline dark:text-white md:text-xl">{{ $blog['title'] }}</p>
                             {{-- <p class="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
                                 @php
                                     // Find the position of "<p>"
@@ -62,13 +62,14 @@ new class extends Component
                             </p> --}}
 
                             <div class="flex mt-3 justify-between">
-                                <p class="text-blue-500 text-sm">{{ ($blog['type'] == 0) ? "News" : "Blog" }}</p>
+                                <p class="text-blue-500 text-sm">{{ ($blog['type'] == 0) ? (app()->getLocale() == 'th' ? "ข่าวสาร" : "News") : (app()->getLocale() == 'th' ? "บทความ" : "Blog") }}</p>
                                 <p class="text-sm text-blue-500">
-                                    {{ \Carbon\Carbon::parse($blog['updated_at'])->locale('en')->isoFormat('D MMMM YYYY') }}
+                                    {{ \Carbon\Carbon::parse($blog['updated_at'])->locale(app()->getLocale())->isoFormat('D MMMM YYYY') }}
                                 </p>
                             </div>
                         </div>
                     </div>
+                </a>
                 @endforeach
             </div>
             <div class="mt-4">

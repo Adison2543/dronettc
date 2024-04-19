@@ -64,7 +64,7 @@ new class extends Component
                                     @endphp
                                 </p>
                                 <p class="text-sm text-blue-500">
-                                    {{ \Carbon\Carbon::parse($promotion['updated_at'])->locale( config('app.locale', 'th') )->isoFormat('D MMMM YYYY') }}
+                                    {{ \Carbon\Carbon::parse($promotion['updated_at'])->locale( app()->getLocale() )->isoFormat('D MMMM YYYY') }}
                                 </p>
                             </div>
                         </div>

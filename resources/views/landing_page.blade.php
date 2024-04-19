@@ -353,15 +353,54 @@
     </div> <!-- end of slider-1 -->
     <!-- end of Video -->
 
+    @php
+        $blogs = App\Models\Blog::orderBy('id', 'desc')->limit(6)->get(['id','cover', 'title', 'type', 'updated_at']);
+    @endphp
     <!-- Testimonials -->
-    <div class="py-32 container px-4 sm:px-6 md:px-8">
+    <div class="py-20 container px-4 sm:px-6 md:px-8">
+        <h2 class="text-center lg:max-w-xl mb-20 lg:mx-auto">บทความและข่าวสาร</h2>
+        @if ($blogs)
+            <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+                @foreach ($blogs as $blog)
+                    <a href="/blog/detail/{{ $blog->id }}">
+                        <div class="group/card">
+                            <img class="relative z-10 object-cover w-full rounded-md h-72" src="/uploads/news/{{ $blog->cover }}" alt="">
+
+                            <div class="transition group-hover/card:-translate-y-6 relative z-20 max-w-lg p-6 mx-auto -mt-24 w-11/12 bg-white rounded-md shadow dark:bg-gray-900">
+                                <p class="font-semibold text-gray-800 hover:underline dark:text-white md:text-lg">{{ $blog->title }}</p>
+                                <div class="flex mt-3 justify-between">
+                                    <p class="text-blue-500 text-sm">{{ ($blog->type == 0) ? (app()->getLocale() == 'th' ? "ข่าวสาร" : "News") : (app()->getLocale() == 'th' ? "บทความ" : "Blog") }}</p>
+                                    <p class="text-sm text-blue-500">
+                                        {{ \Carbon\Carbon::parse($blog->updated_at)->locale(app()->getLocale())->isoFormat('D MMMM YYYY') }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+            <div class="flex justify-center">
+                <a href="/blogs">
+                    <button
+                        type="button"
+                        class="mt-10 inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
+                        See more
+                    </button>
+                </a>
+            </div>
+        @endif
+    </div> <!-- end of slider-1 -->
+    <!-- end of testimonials -->
+
+    <!-- Testimonials -->
+    {{-- <div class="py-32 container px-4 sm:px-6 md:px-8">
         <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
             <div class="flex justify-center items-center"><img class="transition hover:scale-125" src="/img/logoiddrives.png" width="100" alt=""></div>
             <div class="flex justify-center items-center"><img class="transition hover:scale-125" src="/img/logodronettc.png" width="200" alt=""></div>
             <div class="flex justify-center items-center"><img class="transition hover:scale-125" src="/img/aiang.webp" width="200" alt=""></div>
             <div class="flex justify-center items-center"><img class="transition hover:scale-125" src="/img/djilogo.png" width="200" alt=""></div>
         </div>
-    </div> <!-- end of slider-1 -->
+    </div> --}}
     <!-- end of testimonials -->
 
 
