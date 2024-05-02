@@ -42,11 +42,11 @@
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
         {{-- Sweet alert --}}
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://fastly.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <link
             rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+            href="https://fastly.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
 
         <script src="https://cdn.websitepolicies.io/lib/cconsent/cconsent.min.js" defer></script>
         <script>window.addEventListener("load",function(){window.wpcb.init({"colors":{"popup":{"background":"#ffe8ff","text":"#000000","border":"#9f5ec2"},"button":{"background":"#9f5ec2","text":"#ffffff"}},"position":"bottom","border":"thin","corners":"normal"})});</script>
@@ -177,7 +177,7 @@
         {{-- aos animations --}}
         <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
         <!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com -->
-        <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+        <script src="https://fastly.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
         <script>
           AOS.init();
         </script>
